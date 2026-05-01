@@ -1,0 +1,30 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        required: true
+        type: string
+    secrets:
+      MY_SECRET:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Print Secret (Demo)
+      run: echo "Secret received!"
+
+    - name: Run App
+      run: python app.py

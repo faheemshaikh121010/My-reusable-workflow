@@ -1,0 +1,14 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      python-version: "3.10"
+    secrets:
+      MY_SECRET: ${{ secrets.MY_SECRET }}
